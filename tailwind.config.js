@@ -9,22 +9,25 @@ module.exports = {
     extend: {
       colors: {
         // Dark Mode
-        'dark-bg': '#0a0a0a',
-        'dark-surface': '#1a1a1a',
-        'dark-border': 'rgba(255,255,255,0.1)',
+        'dark-bg': '#0a0f1a',
+        'dark-surface': '#0f1621',
+        'dark-border': 'rgba(0, 245, 210, 0.1)',
         'dark-text-primary': '#ffffff',
-        'dark-text-secondary': '#a0a0a0',
+        'dark-text-secondary': '#a8c5dd',
 
         // Light Mode
         'light-bg': '#ffffff',
-        'light-surface': '#f8f8f8',
-        'light-border': 'rgba(0,0,0,0.1)',
+        'light-surface': '#f0f9ff',
+        'light-border': 'rgba(0, 245, 210, 0.2)',
         'light-text-primary': '#000000',
-        'light-text-secondary': '#4b5563',
+        'light-text-secondary': '#0f5a6f',
 
-        // Accent Colors
-        'accent-amber': '#fbbf24',
-        'accent-amber-dark': '#d97706',
+        // NEON Accent Colors (Cyan/Turquoise)
+        'neon-cyan': '#00f5d2',
+        'neon-cyan-dark': '#00b8a0',
+        'neon-blue': '#0099ff',
+        'neon-purple': '#a855f7',
+        'neon-pink': '#ff006e',
         'success': '#10b981',
         'error': '#ef4444',
         'warning': '#f59e0b',
