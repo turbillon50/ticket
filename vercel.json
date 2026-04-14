@@ -2,10 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "nodejs": "20.x",
   "env": {
     "NEXT_PUBLIC_APP_URL": "https://ticket.vercel.app",
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_test_example_do_not_use_in_production"
-  },
-  "envPrefix": "NEXT_PUBLIC_"
+  }
 }
