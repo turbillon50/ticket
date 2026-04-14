@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import HeroSection from '@/components/HeroSection'
+import Hero from '@/components/Hero'
 import EventsGrid from '@/components/EventsGrid'
 import EventsWithYouTube from '@/components/EventsWithYouTube'
 import FlightsWithSkyscanner from '@/components/FlightsWithSkyscanner'
 import AccommodationsWithMap from '@/components/AccommodationsWithMap'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'events' | 'flights' | 'accommodations'>('events')
@@ -20,7 +21,7 @@ export default function Home() {
   return (
     <div className="bg-dark-bg text-white">
       {/* Hero */}
-      <HeroSection />
+      <Hero />
 
       {/* Featured Events Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -125,6 +126,8 @@ export default function Home() {
           </motion.button>
         </motion.div>
       </section>
+
+      <Footer />
     </div>
   )
 }
