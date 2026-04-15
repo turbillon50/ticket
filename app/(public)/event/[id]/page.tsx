@@ -6,6 +6,7 @@ import { useCart } from '@/lib/store'
 import { useAuth } from '@clerk/nextjs'
 import { useState } from 'react'
 import ReviewSection from '@/components/reviews/ReviewSection'
+import SocialShare from '@/components/sharing/SocialShare'
 import { getEventReviews, createReview } from '@/lib/reviews'
 import { useEffect } from 'react'
 
@@ -309,6 +310,16 @@ export default function EventPage() {
                   Sign in to add items to cart
                 </p>
               )}
+
+              {/* Social Share */}
+              <div className="mt-6">
+                <SocialShare
+                  eventName={event.name}
+                  eventUrl={`https://urmah.events/event/${eventId}`}
+                  eventEmoji={event.emoji}
+                  eventLocation={event.location}
+                />
+              </div>
             </div>
           </motion.div>
         </div>
