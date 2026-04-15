@@ -40,7 +40,7 @@ const SAMPLE_FLIGHTS = [
 ]
 
 export default function FlightsWithSkyscanner() {
-  const [selectedFlight, setSelectedFlight] = useState(null)
+  const [selectedFlight, setSelectedFlight] = useState<number | null>(null)
 
   return (
     <div className="py-20">

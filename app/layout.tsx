@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
+import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
-import { Providers } from "./providers"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: "URMAH - Premium Global Events Platform",
@@ -12,11 +10,6 @@ export const metadata: Metadata = {
     description: "Discover, book, and experience the world's most exclusive events",
     images: ["/og-image.jpg"],
   },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-  },
-  manifest: "/manifest.json",
 }
 
 export default function RootLayout({
@@ -25,24 +18,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#0a0a0a" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <Providers>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <link rel="manifest" href="/manifest.json" />
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+        </head>
+        <body className="bg-dark-bg text-dark-text-primary">
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
