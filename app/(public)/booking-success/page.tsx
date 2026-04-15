@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCart } from '@/lib/store'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
-export default function BookingSuccessPage() {
+function BookingSuccessContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { items } = useCart()
@@ -49,7 +49,7 @@ export default function BookingSuccessPage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100 },
+      transition: { type: 'spring' as const, stiffness: 100 },
     },
   }
 
@@ -216,5 +216,13 @@ export default function BookingSuccessPage() {
         </motion.div>
       </motion.div>
     </div>
+  )
+}
+
+export default function BookingSuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-dark-bg" />}>
+      <BookingSuccessContent />
+    </Suspense>
   )
 }

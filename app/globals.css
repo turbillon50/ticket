@@ -53,23 +53,23 @@ html.light ::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-accent-amber rounded-full;
+  @apply bg-neon-green rounded-full;
   transition: background-color 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-accent-amber-dark;
+  @apply bg-neon-green-dark;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-accent-amber text-dark-bg;
+  @apply bg-neon-green text-dark-bg;
 }
 
 /* Focus Ring */
 :focus {
   outline: none;
-  @apply ring-2 ring-accent-amber ring-offset-2;
+  @apply ring-2 ring-neon-green ring-offset-2;
 }
 
 /* Smooth Transitions */
@@ -87,7 +87,7 @@ html.light ::-webkit-scrollbar-track {
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-accent-amber to-amber-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent;
 }
 
 .card-hover {

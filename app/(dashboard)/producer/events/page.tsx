@@ -116,7 +116,7 @@ export default function ProducerEventsPage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100 },
+      transition: { type: 'spring' as const, stiffness: 100 },
     },
   }
 

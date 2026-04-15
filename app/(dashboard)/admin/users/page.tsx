@@ -22,7 +22,7 @@ export default function AdminUsersPage() {
   const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive' | 'suspended'>('all')
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [showRoleModal, setShowRoleModal] = useState(false)
-  const [newRole, setNewRole] = useState<UserRole>('USER')
+  const [newRole, setNewRole] = useState<UserRole>(UserRole.USER)
 
   // Mock users data
   const allUsers: User[] = [
@@ -30,7 +30,7 @@ export default function AdminUsersPage() {
       id: '1',
       name: 'Sarah Anderson',
       email: 'sarah@urmah.events',
-      role: 'PRODUCER',
+      role: UserRole.PRODUCER,
       joinDate: 'Jan 15, 2026',
       status: 'active',
       eventsCreated: 12,
@@ -41,7 +41,7 @@ export default function AdminUsersPage() {
       id: '2',
       name: 'Mike Johnson',
       email: 'mike@urmah.events',
-      role: 'PRODUCER',
+      role: UserRole.PRODUCER,
       joinDate: 'Dec 1, 2025',
       status: 'active',
       eventsCreated: 8,
@@ -52,7 +52,7 @@ export default function AdminUsersPage() {
       id: '3',
       name: 'Emma Wilson',
       email: 'emma@example.com',
-      role: 'USER',
+      role: UserRole.USER,
       joinDate: 'Feb 10, 2026',
       status: 'active',
       eventsCreated: 0,
@@ -63,7 +63,7 @@ export default function AdminUsersPage() {
       id: '4',
       name: 'John Doe',
       email: 'john@example.com',
-      role: 'USER',
+      role: UserRole.USER,
       joinDate: 'Jan 20, 2026',
       status: 'inactive',
       eventsCreated: 0,
@@ -74,7 +74,7 @@ export default function AdminUsersPage() {
       id: '5',
       name: 'Lisa Chen',
       email: 'lisa@urmah.events',
-      role: 'ADMIN',
+      role: UserRole.ADMIN,
       joinDate: 'Nov 1, 2025',
       status: 'active',
       eventsCreated: 0,
@@ -85,7 +85,7 @@ export default function AdminUsersPage() {
       id: '6',
       name: 'James Smith',
       email: 'james@example.com',
-      role: 'USER',
+      role: UserRole.USER,
       joinDate: 'Feb 5, 2026',
       status: 'suspended',
       eventsCreated: 0,
@@ -105,13 +105,13 @@ export default function AdminUsersPage() {
 
   const getRoleColor = (role: UserRole) => {
     switch (role) {
-      case 'ADMIN':
+      case UserRole.ADMIN:
         return 'bg-red-500/20 text-red-400'
-      case 'PRODUCER':
+      case UserRole.PRODUCER:
         return 'bg-neon-green/20 text-neon-green'
-      case 'USER':
+      case UserRole.USER:
         return 'bg-blue-500/20 text-blue-400'
-      case 'GUEST':
+      case UserRole.GUEST:
         return 'bg-dark-text-secondary/20 text-dark-text-secondary'
       default:
         return 'bg-gray-500/20 text-gray-400'
@@ -159,7 +159,7 @@ export default function AdminUsersPage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100 },
+      transition: { type: 'spring' as const, stiffness: 100 },
     },
   }
 
@@ -194,7 +194,7 @@ export default function AdminUsersPage() {
         <div className="bg-dark-card border border-neon-green/20 rounded-lg p-4">
           <p className="text-dark-text-secondary text-sm mb-2">Producers</p>
           <p className="text-3xl font-bold text-white">
-            {allUsers.filter((u) => u.role === 'PRODUCER').length}
+            {allUsers.filter((u) => u.role === UserRole.PRODUCER).length}
           </p>
           <p className="text-neon-green text-xs mt-2">Event creators</p>
         </div>
@@ -377,7 +377,7 @@ export default function AdminUsersPage() {
             </p>
 
             <div className="space-y-3 mb-6">
-              {(['ADMIN', 'PRODUCER', 'USER', 'GUEST'] as const).map((role) => (
+              {([UserRole.ADMIN, UserRole.PRODUCER, UserRole.USER, UserRole.GUEST] as const).map((role) => (
                 <label key={role} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-dark-bg transition-colors">
                   <input
                     type="radio"
@@ -387,7 +387,7 @@ export default function AdminUsersPage() {
                     onChange={(e) => setNewRole(e.target.value as UserRole)}
                     className="w-4 h-4 accent-neon-green"
                   />
-                  <span className="text-white font-semibold">{role}</span>
+                  <span className="text-white font-semibold">{role.toUpperCase()}</span>
                 </label>
               ))}
             </div>
