@@ -1,18 +1,26 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import StatsCard from '@/components/dashboard/StatsCard'
 import { useAuth, useUser } from '@clerk/nextjs'
 
 const STATS = [
-  { label: 'Total Users', value: '12,543', icon: '👥', trend: '+12%' },
-  { label: 'Total Events', value: '342', icon: '🎪', trend: '+8%' },
-  { label: 'Total Revenue', value: '$2.4M', icon: '💰', trend: '+24%' },
-  { label: 'Active Bookings', value: '1,428', icon: '🎫', trend: '+15%' },
+  { label: 'Total Users', value: '6', icon: '👥', trend: '+12%' },
+  { label: 'Total Events', value: '4', icon: '🎪', trend: '+8%' },
+  { label: 'Total Revenue', value: '$853K', icon: '💰', trend: '+24%' },
+  { label: 'Active Bookings', value: '896', icon: '🎫', trend: '+15%' },
+]
+
+const recentEvents = [
+  { id: '1', name: 'Electric Summer Festival', producer: 'Sarah Anderson', status: 'Active', revenue: '$307.5K' },
+  { id: '2', name: 'Mountain Music Retreat', producer: 'Mike Johnson', status: 'Active', revenue: '$109K' },
+  { id: '3', name: 'Beach Party 2026', producer: 'Sarah Anderson', status: 'Draft', revenue: '$0' },
 ]
 
 export default function AdminDashboard() {
   const { user } = useUser()
+  const router = useRouter()
 
   return (
     <div className="flex-1 p-8 bg-dark-bg">
@@ -23,10 +31,10 @@ export default function AdminDashboard() {
         className="mb-8"
       >
         <h1 className="text-4xl font-bold font-playfair text-white mb-2">
-          Dashboard
+          Admin Dashboard
         </h1>
         <p className="text-dark-text-secondary">
-          Welcome back, {user?.firstName}! 👋
+          Welcome back, {user?.firstName}! Full platform control at your fingertips 👋
         </p>
       </motion.div>
 
@@ -56,17 +64,32 @@ export default function AdminDashboard() {
             boxShadow: '0 0 40px rgba(0, 255, 136, 0.05)',
           }}
         >
-          <h2 className="text-2xl font-bold text-white mb-4">Recent Events</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold text-white">Recent Events</h2>
+            <button
+              onClick={() => router.push('/dashboard/admin/events')}
+              className="text-neon-green hover:text-neon-green-light text-sm font-semibold transition-colors"
+            >
+              View All →
+            </button>
+          </div>
           <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center justify-between p-3 bg-dark-bg rounded-lg border border-neon-green/10">
+            {recentEvents.map((event) => (
+              <div key={event.id} className="flex items-center justify-between p-4 bg-dark-bg rounded-lg border border-neon-green/10 hover:border-neon-green/30 transition-all">
                 <div>
-                  <p className="text-white font-semibold">Event #{i}</p>
-                  <p className="text-dark-text-secondary text-sm">Created 2 hours ago</p>
+                  <p className="text-white font-semibold">{event.name}</p>
+                  <p className="text-dark-text-secondary text-sm">by {event.producer}</p>
                 </div>
-                <span className="px-3 py-1 bg-neon-green/10 text-neon-green rounded-full text-xs font-semibold">
-                  Active
-                </span>
+                <div className="text-right">
+                  <p className="text-neon-green font-semibold">{event.revenue}</p>
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    event.status === 'Active'
+                      ? 'bg-neon-green/10 text-neon-green'
+                      : 'bg-yellow-500/10 text-yellow-400'
+                  }`}>
+                    {event.status}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -82,16 +105,37 @@ export default function AdminDashboard() {
             boxShadow: '0 0 40px rgba(0, 255, 136, 0.05)',
           }}
         >
-          <h2 className="text-2xl font-bold text-white mb-4">Quick Actions</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Admin Actions</h2>
           <div className="space-y-3">
-            <button className="w-full px-4 py-3 bg-neon-green text-dark-bg font-bold rounded-lg hover:bg-neon-green-dark transition-all">
-              Create Event
+            <button
+              onClick={() => router.push('/dashboard/admin/users')}
+              className="w-full px-4 py-3 bg-neon-green text-dark-bg font-bold rounded-lg hover:bg-neon-green-dark transition-all text-sm"
+            >
+              👥 Manage Users
             </button>
-            <button className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all">
-              Manage Users
+            <button
+              onClick={() => router.push('/dashboard/admin/events')}
+              className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all text-sm"
+            >
+              🎪 Review Events
             </button>
-            <button className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all">
-              View Reports
+            <button
+              onClick={() => router.push('/dashboard/admin/analytics')}
+              className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all text-sm"
+            >
+              📊 View Analytics
+            </button>
+            <button
+              onClick={() => router.push('/dashboard/admin/payments')}
+              className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all text-sm"
+            >
+              💳 Payments & Payouts
+            </button>
+            <button
+              onClick={() => router.push('/dashboard/admin/settings')}
+              className="w-full px-4 py-3 border border-neon-green/50 text-neon-green font-bold rounded-lg hover:bg-neon-green/10 transition-all text-sm"
+            >
+              ⚙️ Platform Settings
             </button>
           </div>
         </motion.div>
